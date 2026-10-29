@@ -1,0 +1,6 @@
+{
+  "name": "COUTUREFLOSS — Influencer Media Kit & Brand Studio",
+  "description": "Premium influencer media kit dashboard, brand collaborations CRM, pitch studio, rate card, and creator analytics for Sharmistha (@couturefloss).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-orchid: #E7B0DE;
+    --color-eggplant: #400849;
+    --color-signal: #FF5A0A;
+    --color-warm-ivory: #FFF9F5;
+    --color-lavender: #F5E8F5;
+    --color-plum: #806785;
+    --color-peach: #FFE4D5;
+    --color-border-light: #E9DDE8;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #FFF9F5;
+    color: #400849;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+.font-display {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.font-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-sans {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Custom scrollbars with brand elegance */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #FFF9F5;
+}
+::-webkit-scrollbar-thumb {
+  background: #E7B0DE;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #806785;
+}
+
+/* Print styles for authentic high-resolution PDF export */
+@media print {
+  body {
+    background-color: #FFFFFF !important;
+    color: #400849 !important;
+    font-size: 11pt;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .page-break-before {
+    page-break-before: always;
+    break-before: page;
+  }
+  .page-break-after {
+    page-break-after: always;
+    break-before: page;
+  }
+  .page-break-avoid {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  aside, nav, header {
+    display: none !important;
+  }
+  main {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
