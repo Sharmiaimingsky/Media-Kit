@@ -79,7 +79,7 @@ interface AppContextType {
   resetAllData: () => void;
 }
 
-const STORAGE_KEY = 'couturefloss_store_v2';
+const STORAGE_KEY = 'couturefloss_store_v3';
 
 const defaultNotifications: AppNotification[] = [
   {
@@ -122,8 +122,26 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   // Loaded from LocalStorage or Initial
   const [profile, setProfile] = useState<CreatorProfile>(() => {
     try {
-      const saved = localStorage.getItem(`${STORAGE_KEY}_profile`);
-      return saved ? JSON.parse(saved) : initialProfile;
+      const saved =
+        localStorage.getItem(`${STORAGE_KEY}_profile`) ||
+        localStorage.getItem('couturefloss_store_v2_profile');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.businessEmail === 'collaborations@couturefloss.com' || !parsed.businessEmail) {
+          parsed.businessEmail = 'sharmic17@gmail.com';
+        }
+        if (parsed.location === 'Mumbai & Delhi, India' || !parsed.location) {
+          parsed.location = 'Bengaluru, India';
+        }
+        if (parsed.avgReelViews === 311000) {
+          parsed.avgReelViews = 68000;
+          parsed.avgReelViewsDisplay = '68,000+';
+          parsed.engagementRate = 6.68;
+          parsed.engagementRateVerified = true;
+        }
+        return parsed;
+      }
+      return initialProfile;
     } catch {
       return initialProfile;
     }
@@ -150,7 +168,18 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [rates, setRates] = useState<RateItem[]>(() => {
     try {
       const saved = localStorage.getItem(`${STORAGE_KEY}_rates`);
-      return saved ? JSON.parse(saved) : initialRateItems;
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (
+          Array.isArray(parsed) &&
+          (parsed.some(r => (r.id === 'rate-1' || r.id === 'rate-reel') && r.basePriceINR > 25000) ||
+           !parsed.some(r => r.id === 'rate-1'))
+        ) {
+          return initialRateItems;
+        }
+        return parsed;
+      }
+      return initialRateItems;
     } catch {
       return initialRateItems;
     }
@@ -159,7 +188,18 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [portfolio, setPortfolio] = useState<PortfolioItem[]>(() => {
     try {
       const saved = localStorage.getItem(`${STORAGE_KEY}_portfolio`);
-      return saved ? JSON.parse(saved) : initialPortfolioItems;
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (
+          Array.isArray(parsed) &&
+          (parsed.some(p => p.id === 'port-1' || !p.shortcode || (p.id === 'port-tint' && p.views !== 66469)) ||
+           !parsed.some(p => p.id === 'port-aqualogica'))
+        ) {
+          return initialPortfolioItems;
+        }
+        return parsed;
+      }
+      return initialPortfolioItems;
     } catch {
       return initialPortfolioItems;
     }

@@ -129,6 +129,22 @@ export interface PortfolioItem {
   caseStudySummary: string;
   publishedDate: string;
   accentColor?: string;
+  shortcode?: string;
+  captionSnippet?: string;
+  verifiedComments?: string | number;
+  saves?: string;
+  liveProofUrl?: string;
+  // Authentic Meta Dashboard Insights data:
+  isMetaVerifiedScreenshot?: boolean;
+  insightScreenshotUrl?: string;
+  likesCount?: number;
+  savesCount?: number;
+  sharesCount?: number;
+  commentsCount?: number;
+  totalInteractions?: number;
+  uniqueViewers?: number;
+  nonFollowerReachPercent?: number;
+  nonFollowerInteractionPercent?: number;
 }
 
 export type DeliverableStepStatus = 'Not Started' | 'In Progress' | 'Drafting' | 'Pending' | 'Under Review' | 'Approved' | 'Completed';
